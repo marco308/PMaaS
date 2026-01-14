@@ -1,10 +1,12 @@
-from fastapi import FastAPI, Request
+from fastapi import APIRouter, FastAPI, Request
 from fastapi.responses import JSONResponse
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
 from app.meetings import get_random_meeting
+
+router = APIRouter(prefix="/api")
 
 DESCRIPTION = """\
 > *Finally, enterprise-grade infrastructure for your drinking problems.*
@@ -74,7 +76,7 @@ def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded):
 app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 
 
-@app.get(
+@router.get(
     "/meeting",
     summary="Get a meeting name",
     description=(
@@ -110,3 +112,6 @@ app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 @limiter.limit("5/minute")
 def get_meeting(request: Request):
     return get_random_meeting()
+
+
+app.include_router(router)
