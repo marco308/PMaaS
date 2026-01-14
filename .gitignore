@@ -38,6 +38,8 @@ Thumbs.db
 
 # Docker
 .docker/
+docker-stack.yml
+deploy.sh
 
 # Environment
 .env
