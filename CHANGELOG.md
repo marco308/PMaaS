@@ -13,6 +13,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.2.2] - 2026-01-15
+
+### Changed
+- Test workflow now only runs on PRs (no more double-dipping on pushes to main)
+
+### Removed
+- AI changelog suggestion workflow - we'll write our own bar tabs, thank you
+- Automated release PR workflow - going back to artisanal, hand-crafted releases
+- Publish release workflow - manual releases have more character
+
+---
+
 ## [1.1.0] - 2026-01-14
 
 ### Added
@@ -63,6 +75,7 @@ Because we're committed to the bit:
 |---------|----------|
 | 1.0.0   | "First Round" |
 | 1.1.0   | "Second Round" |
+| 1.2.2   | "Last Orders" |
 | 2.0.0   | TBD |
 
 ---
