@@ -43,7 +43,6 @@ MEETINGS = [
     "Fermenting Goals",
     "Half Pint Huddle",
     "Flagon Forecasting",
-    "Brew Crew Sync",
     "Draught Meeting",
     "Tapped In Team Talk",
     "Pour Decisions Review",
