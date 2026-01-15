@@ -41,12 +41,10 @@ jobs:
             echo "No release needed"
           fi
 
-      - name: Run semantic-release (no push)
+      - name: Run semantic-release (no commit/push)
         if: steps.check.outputs.should_release == 'true'
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          semantic-release version --no-push --no-tag --no-vcs-release
+          semantic-release version --no-commit --no-push --no-tag --no-vcs-release
 
       - name: Create Pull Request
         if: steps.check.outputs.should_release == 'true'
