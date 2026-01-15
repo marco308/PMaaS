@@ -1,0 +1,73 @@
+name: Release PR
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install python-semantic-release
+        run: pip install python-semantic-release
+
+      - name: Check for releasable changes
+        id: check
+        run: |
+          # Get the next version (returns empty if no release needed)
+          NEXT_VERSION=$(semantic-release version --print 2>/dev/null || echo "")
+          if [ -n "$NEXT_VERSION" ]; then
+            echo "next_version=$NEXT_VERSION" >> $GITHUB_OUTPUT
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "Next version will be: $NEXT_VERSION"
+          else
+            echo "should_release=false" >> $GITHUB_OUTPUT
+            echo "No release needed"
+          fi
+
+      - name: Run semantic-release (no push)
+        if: steps.check.outputs.should_release == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          semantic-release version --no-push --no-tag --no-vcs-release
+
+      - name: Create Pull Request
+        if: steps.check.outputs.should_release == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release/v${{ steps.check.outputs.next_version }}
+          title: "chore(release): v${{ steps.check.outputs.next_version }} 🍺"
+          body: |
+            ## Automated Release PR
+
+            This PR was automatically created by the release workflow.
+
+            **Version:** `${{ steps.check.outputs.next_version }}`
+
+            ### Changes included
+            - Version bump in `pyproject.toml`
+            - Updated `CHANGELOG.md`
+
+            ---
+            *Merge this PR to trigger the GitHub Release.*
+          commit-message: "chore(release): v${{ steps.check.outputs.next_version }} 🍺"
+          labels: release
+          delete-branch: true
