@@ -13,6 +13,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ---
 
+## [1.1.0] - 2026-01-14
+
+### Added
+- Documentation files: CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
+- Updated .gitignore for deployment files (docker-stack.yml, deploy.sh)
+
+### Changed
+- Refactored API routes to use `/api` prefix for cleaner structure
+- Updated tests to match new endpoint paths
+- **Dependencies:**
+  - fastapi: ^0.115.0 → ^0.128.0
+  - httpx: ^0.27.0 → ^0.28.1
+  - uvicorn: ^0.32.0 → ^0.40.0
+  - pytest: ^8.0.0 → ^9.0.2
+  - ruff: ^0.8.0 → ^0.14.11
+- **Docker:** Python 3.12-slim → 3.14-slim
+- **CI/CD:**
+  - actions/checkout: 4 → 6
+  - actions/setup-python: 5 → 6
+  - actions/cache: 4 → 5
+
+### Fixed
+- Test badge URL in README.md
+
+---
+
 ## [1.0.0] - 2024-01-14
 
 ### Added
@@ -36,7 +62,7 @@ Because we're committed to the bit:
 | Version | Codename |
 |---------|----------|
 | 1.0.0   | "First Round" |
-| 1.1.0   | TBD |
+| 1.1.0   | "Second Round" |
 | 2.0.0   | TBD |
 
 ---

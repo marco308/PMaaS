@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pmaas"
-version = "1.0.0"
+version = "1.1.0"
 description = "Pub Meeting as a Service - Generate pun-based meeting names for pub gatherings"
 authors = ["marco308"]
 license = "MIT"
