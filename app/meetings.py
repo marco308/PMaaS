@@ -49,7 +49,7 @@ MEETINGS = [
     "Pour Decisions Review",
     "Alegorithm Review",
     "ABV Analysis",
-    "Hops Analysis"
+    "Hops Analysis",
 ]
 
 
