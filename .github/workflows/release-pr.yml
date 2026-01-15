@@ -9,6 +9,8 @@ on:
 jobs:
   release-pr:
     runs-on: ubuntu-latest
+    # Skip if this is a release commit (prevents circular triggering)
+    if: "!startsWith(github.event.head_commit.message, 'chore(release):')"
     permissions:
       contents: write
       pull-requests: write
@@ -50,6 +52,8 @@ jobs:
         if: steps.check.outputs.should_release == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
+          # Note: GITHUB_TOKEN requires "Allow GitHub Actions to create and approve pull requests"
+          # enabled in Settings > Actions > General. Alternatively, use a PAT stored as RELEASE_TOKEN.
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: release/v${{ steps.check.outputs.next_version }}
           title: "chore(release): v${{ steps.check.outputs.next_version }} 🍺"
