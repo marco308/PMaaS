@@ -1,3 +1,6 @@
+import tomllib
+from pathlib import Path
+
 from fastapi import APIRouter, FastAPI, Request
 from fastapi.responses import JSONResponse
 from slowapi import Limiter
@@ -5,6 +8,15 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
 from app.meetings import get_random_meeting
+
+
+def get_version() -> str:
+    """Read version from pyproject.toml."""
+    pyproject_path = Path(__file__).parent.parent / "pyproject.toml"
+    with open(pyproject_path, "rb") as f:
+        data = tomllib.load(f)
+    return data["tool"]["poetry"]["version"]
+
 
 router = APIRouter(prefix="/api")
 
@@ -47,7 +59,7 @@ app = FastAPI(
     title="🍺 PMaaS",
     summary="Pub Meeting as a Service",
     description=DESCRIPTION,
-    version="1.0.0",
+    version=get_version(),
     contact={
         "name": "Complaints Department",
         "url": "https://github.com/marco308/PMaaS/issues",
