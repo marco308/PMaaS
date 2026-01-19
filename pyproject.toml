@@ -18,7 +18,7 @@ pytest = "^9.0.2"
 pytest-cov = "^6.0.0"
 httpx = "^0.28.1"
 ruff = "^0.14.11"
-python-semantic-release = "^9.0.0"
+python-semantic-release = "^10.5.3"
 
 [build-system]
 requires = ["poetry-core"]
