@@ -17,7 +17,7 @@ slowapi = "^0.1.9"
 pytest = "^9.0.3"
 pytest-cov = "^7.0.0"
 httpx = "^0.28.1"
-ruff = ">=0.14.11,<0.16.0"
+ruff = ">=0.14.11,<0.17.0"
 python-semantic-release = ">=9,<11"
 
 [build-system]
