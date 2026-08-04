@@ -10,7 +10,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = ">=0.128,<0.139"
-uvicorn = ">=0.40,<0.50"
+uvicorn = ">=0.40,<0.51"
 slowapi = "^0.1.9"
 
 [tool.poetry.group.dev.dependencies]
