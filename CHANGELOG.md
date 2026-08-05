@@ -9,7 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ## [Unreleased]
 
 ### Added
-- Nothing yet. Buy us a pint and we might add something.
+- 100 new meeting names, from "Porter's Five Forces Analysis" to "On-Premise Migration Review" - triple the cover stories, same great taste
+- House rule for contributions: every name must survive a manager's glance
 
 ---
 
