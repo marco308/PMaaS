@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 - 100 new meeting names, from "Porter's Five Forces Analysis" to "On-Premise Migration Review" - triple the cover stories, same great taste
 - House rule for contributions: every name must survive a manager's glance
+- Pre-built Docker images on GHCR (`ghcr.io/marco308/pmaas`) for amd64 and arm64 - no cloning required
+- Release workflow: push a version tag and it publishes the image and a GitHub release with the CHANGELOG notes. You still decide when last orders are
+- Docker build and smoke test on every PR
+
+### Changed
+- Slimmer, safer Docker image: multi-stage build without Poetry, runs as a non-root `barkeep` user, includes a healthcheck, and uses Python 3.12 to match CI
+- `docker compose up` now pulls the published image (use `--build` to build locally)
 
 ---
 
