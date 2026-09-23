@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+---
+
+## [1.3.0] - 2026-09-23
+
 ### Added
 - 100 new meeting names, from "Porter's Five Forces Analysis" to "On-Premise Migration Review" - triple the cover stories, same great taste
 - House rule for contributions: every name must survive a manager's glance
@@ -18,6 +22,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 - Slimmer, safer Docker image: multi-stage build without Poetry, runs as a non-root `barkeep` user, includes a healthcheck, and uses Python 3.12 to match CI
 - `docker compose up` now pulls the published image (use `--build` to build locally)
+
+### Removed
+- Claude Code GitHub Actions workflows
+
+### Security
+- Bumped anyio, gitpython and pygments to patch security alerts
 
 ---
 
