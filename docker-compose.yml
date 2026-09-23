@@ -1,5 +1,6 @@
 services:
   api:
+    image: ghcr.io/marco308/pmaas:latest
     build: .
     ports:
       - "8000:8000"

@@ -55,11 +55,38 @@ Just like a real pub.
 
 ## Self-Hosting
 
+No cloning required. Grab the pre-built image (amd64 and arm64, so your Raspberry Pi can join the pub too):
+
 ```bash
-docker compose up --build
+docker run -d -p 8000:8000 --name pmaas ghcr.io/marco308/pmaas:latest
 ```
 
 Now you have your own personal meeting name generator running on port 8000. Your IT department will be so proud.
+
+Prefer to pin a version? Every [release](https://github.com/marco308/PMaaS/releases) is tagged, e.g. `ghcr.io/marco308/pmaas:1.3.0` (or `:1.3` / `:1` to follow a line).
+
+Or with Compose:
+
+```bash
+docker compose up -d          # uses the published image
+docker compose up --build     # builds from your local checkout instead
+```
+
+**Behind a reverse proxy?** Set `FORWARDED_ALLOW_IPS` to your proxy's IP so the rate limiter sees real client addresses instead of cutting off everyone at once:
+
+```bash
+docker run -d -p 8000:8000 -e FORWARDED_ALLOW_IPS=172.17.0.1 ghcr.io/marco308/pmaas:latest
+```
+
+## Releasing
+
+Releases are still artisanal and hand-crafted - automation just pours the pint:
+
+1. Bump `version` in `pyproject.toml`
+2. Move the `[Unreleased]` CHANGELOG entries under a new `## [x.y.z] - YYYY-MM-DD` heading
+3. Merge to `main`, then tag it: `git tag vx.y.z && git push origin vx.y.z`
+
+The [Release workflow](.github/workflows/release.yml) checks the tag matches `pyproject.toml`, runs the tests, publishes the image to GHCR, and creates a GitHub release using that version's CHANGELOG notes.
 
 ## Development
 
