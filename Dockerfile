@@ -1,5 +1,5 @@
 # Stage 1: export pinned runtime deps from poetry.lock (Poetry stays out of the final image)
-FROM python:3.12-slim AS builder
+FROM python:3.14-slim AS builder
 
 RUN pip install --no-cache-dir poetry poetry-plugin-export
 
@@ -8,7 +8,7 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry export --only main --format requirements.txt --output requirements.txt
 
 # Stage 2: the actual pub
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 LABEL org.opencontainers.image.title="PMaaS" \
       org.opencontainers.image.description="Pub Meeting as a Service" \
